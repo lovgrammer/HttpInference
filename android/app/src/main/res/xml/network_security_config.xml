@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+  <domain-config cleartextTrafficPermitted="true">
+    <!-- <domain includeSubdomains="true">147.46.130.215</domain> -->
+    <domain includeSubdomains="true">5g.lovgrammer.net</domain>
+  </domain-config>
+</network-security-config>
