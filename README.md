@@ -2,11 +2,6 @@
 
 HttpInference is a http android client and http server example for deep learning offloading.
    
-~~~
-cat /sys/class/power_supply/battery/voltage_now
-cat /sys/class/power_supply/battery/current_now
-~~~
-
 ## Android Build
 1) git clone https://github.com/lovgrammer/HttpInference.git
 2) import project to your Android Studio
@@ -17,10 +12,10 @@ cat /sys/class/power_supply/battery/current_now
 2) ./install.sh
 3) cd infserver
 4) python3 manage.py migrate
-5) python3 manage.py runserver <IP>:<PORT>
+5) python3 manage.py runserver ip:port
 
 ## How to use HttpInference:
-1) Type in the remote1 and remote2 server IP "http://ip:port/" (you should put / in the end of the string)
+1) Type in the remote1 and remote2 server IP "http://yourip:yourport/" (you should put / in the end of the string)
 (e.g., remote1 - edge server, remote2 - cloud server)
 2) Click start button
 3) Then, HttpInference app execute three process for 100 images
