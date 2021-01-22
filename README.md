@@ -37,12 +37,12 @@ cat /sys/class/power_supply/battery/current_now
 
 
 ## Application Image
-![App1](./images/App1.jpg | width=100)
-![App2](./images/App2.jpg | width=100)
-![App2](./images/App2.jpg | width=100)
+![App1](./images/App1.jpg){:width="200px"}
+![App2](./images/App2.jpg){:width="200px"}
+![App2](./images/App2.jpg){:width="200px"}
 
 ## Plot Example
-![Result1](./images/Result1.png | width=100)
-![Result2](./images/Result2.png | width=100)
-![Result2](./images/Result2.png | width=100)
+![Result1](./images/Result1.png){:width="200px"}
+![Result2](./images/Result2.png){:width="200px"}
+![Result2](./images/Result2.png){:width="200px"}
 
