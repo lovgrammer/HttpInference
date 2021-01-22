@@ -53,7 +53,8 @@ public class ImageSegmentationModelExecutor {
 	return new ModelExecutionResult(stackTwoBitmaps(maskBitmap, inputImage),
 					inputImage, maskBitmap,
 					formatExecutionLog(inputImage.getWidth(), inputImage.getHeight()),
-					itemsFound);
+					itemsFound,
+					fullTimeExecutionTime);
     }
 
     private Pair<Bitmap, Map<String, Integer>>
