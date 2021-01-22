@@ -39,10 +39,10 @@ cat /sys/class/power_supply/battery/current_now
 ## Application Image
 ![App1](./images/App1.jpg)
 ![App2](./images/App2.jpg)
-![App2](./images/App2.jpg)
+![App3](./images/App3.jpg)
 
 ## Plot Example
 ![Result1](./images/Result1.png)
 ![Result2](./images/Result2.png)
-![Result2](./images/Result2.png)
+![Result3](./images/Result3.png)
 
