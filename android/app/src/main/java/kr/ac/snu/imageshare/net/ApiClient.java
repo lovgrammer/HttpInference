@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 import java.io.File;
 import java.io.IOException;
-import kr.ac.snu.imageshare.Constants;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -12,6 +11,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -23,6 +23,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public class ApiClient {
 
@@ -35,7 +36,7 @@ public class ApiClient {
 
         private static Retrofit retrofit;
 
-        private static Retrofit getRetrofitClient(final Context context) {
+        private static Retrofit getRetrofitClient(final Context context, final String serverAddress) {
             if (retrofit == null) {
                 HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
                 interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -53,7 +54,7 @@ public class ApiClient {
                         })
                         .build();
                 retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
+                    .baseUrl(serverAddress)
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create(GsonUtils.getGsonObject()))
                     .build();
@@ -63,9 +64,9 @@ public class ApiClient {
         }
     }
 
-    public ApiClient(Context context) {
+    public ApiClient(Context context, String serverAddress) {
         this.context = context;
-        retrofit = NetworkClient.getRetrofitClient(this.context);
+        retrofit = NetworkClient.getRetrofitClient(this.context, serverAddress);
         pldaAPIs = retrofit.create(PldaAPIs.class);
     }
 
@@ -73,8 +74,11 @@ public class ApiClient {
         // @POST("splash/")
         // Call<SplashResponse> requestSplash(@Body SplashRequest splashRequest);
 	@Multipart
-	@POST("/upload/uploadimage/")
+	@POST("segmentation/upload/")
 	Call<UploadResponse> uploadFile(@Part MultipartBody.Part file);
+	
+	@GET
+	Call<ResponseBody> fetchCaptcha(@Url String url);	
     }
 
 
@@ -88,5 +92,10 @@ public class ApiClient {
 	
         Call<UploadResponse> call = pldaAPIs.uploadFile(body);	
         return call;
+    }
+
+    public Call downloadFile(String url) {
+	Call<ResponseBody> call = pldaAPIs.fetchCaptcha(url);
+	return call;
     }
 }

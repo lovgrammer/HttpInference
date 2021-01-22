@@ -26,7 +26,7 @@ class MainView(TemplateView):
             f = form.save()
             # return redirect('uploaded')
             run_inference('.' + f.file.url, 'media/output/out.png')
-            return JsonResponse({'file_name': '/media/output/out.png'}, status=200)
+            return JsonResponse({'result': 200, 'file_name': '/media/output/out.png'}, status=200)
         
     def get(self, request, *args, **kwargs):
         form = UploadFileForm()

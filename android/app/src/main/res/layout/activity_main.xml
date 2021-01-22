@@ -6,20 +6,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".MainActivity">
-
-  <TextView
-      android:id="@+id/txt_filenames"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:textSize="16dip"/>
-
-  <Button
-      android:id="@+id/btn_send"
+  <ScrollView
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="8dip"
-      android:text="Start Sending..."/>
-  
+      android:layout_height="wrap_content">
+    <LinearLayout
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+      <EditText
+	  android:id="@+id/edit_remote1"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:hint="Remote1 Server Address\ne.g., http://0.0.0.0:8000/"
+	  android:layout_margin="8dip"/>
+      <EditText
+	  android:id="@+id/edit_remote2"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:hint="Remote2 Server Address\ne.g., http://0.0.0.0:8000/"
+	  android:layout_margin="8dip"/>
+      <TextView
+	  android:id="@+id/txt_filenames"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:visibility="gone"
+	  android:textSize="16dip"/>
+      <Button
+	  android:id="@+id/btn_send"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:layout_margin="8dip"
+	  android:text="Start Testing..."/>
+      <TextView
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:textSize="16dip"
+	  android:text="Original Photo"
+	  android:padding="8dip"/>
+      <ImageView
+	  android:id="@+id/img_original"
+	  android:layout_width="match_parent"
+	  android:layout_height="300dip"
+	  android:scaleType="centerInside"/>
+      <TextView
+	  android:id="@+id/txt_local"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:textSize="16dip"
+	  android:text="Local Result"
+	  android:padding="8dip"/>
+      <ImageView
+	  android:id="@+id/img_local"
+	  android:layout_width="match_parent"
+	  android:layout_height="300dip"
+	  android:scaleType="centerInside"/>
+      <TextView
+	  android:id="@+id/txt_remote1"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:textSize="16dip"
+	  android:text="Remote1 Result"
+	  android:padding="8dip"/>
+      <ImageView
+	  android:id="@+id/img_remote1"
+	  android:layout_width="match_parent"
+	  android:layout_height="300dip"
+	  android:scaleType="centerInside"/>
+      <TextView
+	  android:id="@+id/txt_remote2"
+	  android:layout_width="match_parent"
+	  android:layout_height="wrap_content"
+	  android:textSize="16dip"
+	  android:text="Remote2 Result"
+	  android:padding="8dip"/>
+      <ImageView
+	  android:id="@+id/img_remote2"
+	  android:layout_width="match_parent"
+	  android:layout_height="300dip"
+	  android:scaleType="centerInside"/>
+    </LinearLayout>
+  </ScrollView>
 </LinearLayout>
