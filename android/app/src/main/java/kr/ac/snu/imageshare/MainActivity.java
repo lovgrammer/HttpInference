@@ -1,10 +1,13 @@
 package kr.ac.snu.imageshare;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -91,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
+	
+	requestPermission();
     }
     
     OnClickListener onButtonsClick = new OnClickListener() {
@@ -99,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
 		switch(v.getId()) {
 		case R.id.btn_send:
 		    results.clear();
+		    mAdapter.setData(results);
+		    mAdapter.notifyDataSetChanged();
+		    StatusDataCollector.clear();
 		    currentIndex = 0;
 		    String filename = rootList[currentIndex];
 		    TestProcess t = new TestProcess(MainActivity.this,
@@ -124,9 +132,27 @@ public class MainActivity extends AppCompatActivity {
 			t.run(mRemoteEdit1.getText().toString(),
 			      mRemoteEdit2.getText().toString());
 		    }
+		    StatusDataCollector.saveProcessResult(MainActivity.this, result);
 		    results.add(result);
 		    mAdapter.setData(results);
 		    mAdapter.notifyDataSetChanged();
 		}
 	    };
+
+    public void requestPermission() {
+	if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+	    if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+	       || checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+	       || checkSelfPermission(Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+		if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+		}
+		requestPermissions(new String[] {
+			Manifest.permission.WRITE_EXTERNAL_STORAGE,
+			Manifest.permission.READ_EXTERNAL_STORAGE,
+			Manifest.permission.READ_PHONE_STATE,
+		    }, 2);  
+	    } else {
+	    }
+	}
+    }    
 }
