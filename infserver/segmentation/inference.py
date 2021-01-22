@@ -1,3 +1,4 @@
+import numpy as np
 from keras_segmentation.pretrained import pspnet_50_ADE_20K , pspnet_101_cityscapes, pspnet_101_voc12
 
 # model = pspnet_50_ADE_20K() # load the pretrained model trained on ADE20k dataset
@@ -10,3 +11,4 @@ def run_inference(image_path, out_path):
         inp=image_path,
         out_fname=out_path
     )
+    return len(np.unique(out))

@@ -1,3 +1,5 @@
+import time
+
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, HttpResponse, reverse
 from django.contrib.auth import login as auth_login
@@ -27,8 +29,15 @@ class MainView(TemplateView):
         if form.is_valid():
             f = form.save()
             # return redirect('uploaded')
-            run_inference('.' + f.image.url, 'media/output/out.png')
-            return JsonResponse({'result': 200, 'file_name': '/media/output/out.png'}, status=200)
+            inference_time = int(time.time())
+            number_of_segments = run_inference('.' + f.image.url, 'media/output/out.png')
+            inference_time = int(time.time()) - inference_time
+            return JsonResponse({
+                'result': 200,
+                'file_name': '/media/output/out.png',
+                'inference_time': inference_time,
+                'number_of_segments': number_of_segments
+            }, status=200)
         
     def get(self, request, *args, **kwargs):
         form = UploadFileForm()
