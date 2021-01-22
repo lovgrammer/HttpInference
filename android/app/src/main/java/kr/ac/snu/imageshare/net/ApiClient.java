@@ -75,7 +75,8 @@ public class ApiClient {
         // Call<SplashResponse> requestSplash(@Body SplashRequest splashRequest);
 	@Multipart
 	@POST("segmentation/upload/")
-	Call<UploadResponse> uploadFile(@Part MultipartBody.Part file);
+	Call<UploadResponse> uploadFile(@Part MultipartBody.Part title,
+					@Part MultipartBody.Part file);
 	
 	@GET
 	Call<ResponseBody> fetchCaptcha(@Url String url);	
@@ -87,10 +88,13 @@ public class ApiClient {
 	RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
 	// MultipartBody.Part is used to send also the actual file name
+	MultipartBody.Part tbody =
+            MultipartBody.Part.createFormData("title", "inputimage");
+	
 	MultipartBody.Part body =
             MultipartBody.Part.createFormData("image", file.getName(), requestFile);
 	
-        Call<UploadResponse> call = pldaAPIs.uploadFile(body);	
+        Call<UploadResponse> call = pldaAPIs.uploadFile(tbody, body);	
         return call;
     }
 

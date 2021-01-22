@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 	
-
-	
 	mFileNameView = (TextView) findViewById(R.id.txt_filenames);
 	mSendButton = (Button) findViewById(R.id.btn_send);
 	mOriginalImage = (ImageView) findViewById(R.id.img_original);
@@ -79,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 	    mRemoteEdit1.setText(ConfigUtil.getRemote1(this));
 	}
 	if (!TextUtils.isEmpty(ConfigUtil.getRemote2(this))) {
-	    mRemoteEdit1.setText(ConfigUtil.getRemote2(this));
+	    mRemoteEdit2.setText(ConfigUtil.getRemote2(this));
 	}
 	try {
 	    AssetManager assetMgr = getAssets();
@@ -167,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 			UploadResponse res = (UploadResponse) response.body();
 			if (res.result == 200) {
 			    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
-			    // requestRemote2();
+
 			    Call<ResponseBody> call2 = mApiClient.downloadFile(res.file_name);
 			    call2.enqueue(new Callback<ResponseBody>() {
 				    @Override
@@ -177,6 +175,9 @@ public class MainActivity extends AppCompatActivity {
 						// display the image data in a ImageView or save it
 						Bitmap bmp = BitmapFactory.decodeStream(response.body().byteStream());
 						mRemoteImage1.setImageBitmap(bmp);
+						if (!TextUtils.isEmpty(ConfigUtil.getRemote2(MainActivity.this))) {
+						    requestRemote2();
+						}
 					    }
 					}
 				    }
